@@ -1,0 +1,17 @@
+# Copy this directory to integrations/<vendor>-<product>/ and fill in.
+# Validated in CI against schema/integration.schema.json.
+name: Example Product
+vendor: Example Corp
+integrates_with:
+  - cmcp        # one or more of: cmcp, trace, agent-manifest
+description: >-
+  One technical sentence describing what this integration does.
+maintainer:
+  github: your-github-username
+repository: https://github.com/example/example-product
+license: Apache-2.0
+tier: community   # set by maintainers during review; submissions start here
+# Required if you emit or consume TRACE records:
+# trace_conformance_level: 1
+tested_against:
+  cmcp-runtime: "0.2.0"

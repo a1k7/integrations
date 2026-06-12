@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://agentrust.io/schema/integration.schema.json",
+  "title": "agentrust-io integration manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "vendor", "integrates_with", "description", "maintainer", "repository", "license", "tier"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 64,
+      "description": "Product or project name."
+    },
+    "vendor": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 64,
+      "description": "Company or community project behind the integration."
+    },
+    "integrates_with": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["cmcp", "trace", "agent-manifest"]
+      },
+      "description": "Which parts of the stack this integrates with."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 200,
+      "description": "One technical sentence. No marketing superlatives; claims must be verifiable."
+    },
+    "maintainer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["github"],
+      "properties": {
+        "github": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9-]{1,39}$",
+          "description": "GitHub username accountable for this integration."
+        },
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      }
+    },
+    "repository": {
+      "type": "string",
+      "pattern": "^https://",
+      "description": "Canonical home of the integration's source."
+    },
+    "homepage": {
+      "type": "string",
+      "pattern": "^https://",
+      "description": "Optional product page. Marketing lives here, not in the README."
+    },
+    "license": {
+      "type": "string",
+      "minLength": 2,
+      "description": "SPDX identifier of the integration directory's license."
+    },
+    "tier": {
+      "type": "string",
+      "enum": ["community", "verified"],
+      "description": "Set by maintainers during review, never self-declared. New submissions use community."
+    },
+    "trace_conformance_level": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2,
+      "description": "Required if the integration emits or consumes TRACE records: the agentrust-trace-tests level it passes."
+    },
+    "tested_against": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "cmcp-runtime": { "type": "string" },
+        "agentrust-trace": { "type": "string" },
+        "agent-manifest": { "type": "string" }
+      },
+      "description": "Released package versions the integration was last tested against."
+    }
+  }
+}

@@ -1,43 +1,52 @@
 # DecisionAssure → TRACE Adapter
 
-Converts a [DecisionAssure](https://github.com/a1k7/DecisionAssure-Runtime-Governance) JSON trace into a **TRACE v0.1 compliant** claim (JSON and signed JWT).
+Converts a [DecisionAssure](https://github.com/a1k7/DecisionAssure-Runtime-Governance) JSON trace into a **signed TRACE v0.1 JWT** (Ed25519) that includes all required claims.
 
 ## Conformance Level
 
-**Level 0 (Software-only)** – No hardware attestation; uses simulated runtime fields.
+**Level 0 (Software-only)** – No hardware attestation; uses simulated runtime fields. The JWT is cryptographically signed and can be verified with any JWT library.
 
 | Check | Status |
 |-------|--------|
 | `eat_profile`, `iat`, `subject` | ✅ |
 | `cnf.jwk` with Ed25519 | ✅ |
 | `policy.bundle_hash` valid digest | ✅ |
-| Passes `trace-tests verify` | ✅ (see below) |
+| Signature binding | ✅ (Ed25519) |
 
 ## Usage
 
-```bash
-pip install -r requirements.txt
-python da_to_trace.py decisionassure_trace.json
-trace-tests verify --record claim.json
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
 
-Output
+2. Run the adapter:
 
-claim.json – JSON claim that passes trace-tests
-claim.jwt – signed JWT (Ed25519) for production use
+bash
+python da_to_trace.py decisionassure_trace.json > claim.jwt
+The JWT is written to claim.jwt and also printed to stdout.
+Verify the JWT payload (example using Python):
+
+bash
+python -c "import jwt; print(jwt.decode(open('claim.jwt').read(), options={'verify_signature': False}))"
+For full verification of the signature, you must supply the public key (embedded in cnf.jwk). The JWT structure conforms to TRACE v0.1.
 Example
 
 bash
-$ python da_to_trace.py bigmae_decisionassure_execution_permitted-3.json
-✅ Wrote claim.json
-✅ Wrote claim.jwt
+$ python da_to_trace.py bigmae_decisionassure_execution_permitted-3.json > claim.jwt
+$ python -c "import jwt; print(jwt.decode(open('claim.jwt').read(), options={'verify_signature': False})['decision'])"
+ALLOW
+Output
 
-$ trace-tests verify --record claim.json
-TRACE Conformance Report -- Level 0
-Result: PASS
+claim.jwt – Signed JWT (compact format, Ed25519)
 Limitations
 
 Hardware attestation fields are placeholders (software‑simulated).
-Not yet multi‑agent delegation or full A2A transcripts.
-Maintainer
+No separate unsigned JSON is produced – the JWT itself is the TRACE record.
+Repository
 
-a1k7
+a1k7/DecisionAssure Runtime Governance
+
+
+## 4. `requirements.txt` (unchanged, but included for completeness)
+PyJWT>=2.8.0
+cryptography>=42.0.0

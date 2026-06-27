@@ -1,5 +1,5 @@
-from src.models import SentinelInput, DetectionResult, DetectionType, RiskLevel
-from src.detectors.base import BaseDetector
+from sentinel.models import SentinelInput, DetectionResult, DetectionType, RiskLevel
+from sentinel.detectors.base import BaseDetector
 
 class IdentityDriftDetector(BaseDetector):
     """

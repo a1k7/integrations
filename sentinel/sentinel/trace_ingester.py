@@ -1,6 +1,6 @@
 import json
-from src.models import SentinelInput, SentinelOutput  # <-- added SentinelOutput
-from src.risk_engine import RiskEngine
+from sentinel.models import SentinelInput, SentinelOutput  # <-- added SentinelOutput
+from sentinel.risk_engine import RiskEngine
 
 def ingest_trace(trace_path: str) -> SentinelOutput:
     with open(trace_path, 'r') as f:

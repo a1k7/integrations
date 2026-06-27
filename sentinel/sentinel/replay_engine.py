@@ -1,7 +1,7 @@
 import copy
 from typing import List
-from src.models import SentinelInput, ReplayResult
-from src.risk_engine import RiskEngine
+from sentinel.models import SentinelInput, ReplayResult
+from sentinel.risk_engine import RiskEngine
 
 class ReplayEngine:
     def __init__(self):

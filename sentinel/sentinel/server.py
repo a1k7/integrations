@@ -2,12 +2,12 @@ from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
-from src.models import (
+from sentinel.models import (
     SentinelInput, Ticket, EnforcementResult, Action,
     IncidentReport, ReplayResult, Receipt
 )
-from src.risk_engine import RiskEngine
-from src.replay_engine import ReplayEngine
+from sentinel.risk_engine import RiskEngine
+from sentinel.replay_engine import ReplayEngine
 import traceback
 import uuid
 import json

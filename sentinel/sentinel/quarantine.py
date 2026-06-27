@@ -1,4 +1,4 @@
-from src.models import QuarantineAction, SentinelOutput
+from sentinel.models import QuarantineAction, SentinelOutput
 
 def generate_quarantine(output: SentinelOutput, agent_id: str) -> SentinelOutput:
     """If risk exceeds threshold, generate a quarantine action."""

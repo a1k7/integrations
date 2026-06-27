@@ -95,9 +95,9 @@ class DetectionResult(BaseModel):
     risk_score: float
     risk_level: RiskLevel
     reason: str
-    evidence: Dict[str, Any]
+    evidence: Optional[Dict[str, Any]] = None
     timestamp: datetime = datetime.now()
-    action: Action = Action.MONITOR
+    action: Optional[Action] = None 
 
 class CollusionPattern(BaseModel):
     pattern_type: str

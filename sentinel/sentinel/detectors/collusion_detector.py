@@ -1,5 +1,5 @@
-from src.models import SentinelInput, DetectionResult, DetectionType, RiskLevel, CollusionPattern
-from src.detectors.base import BaseDetector
+from sentinel.models import SentinelInput, DetectionResult, DetectionType, RiskLevel, CollusionPattern
+from sentinel.detectors.base import BaseDetector
 from typing import List
 class CollusionDetector(BaseDetector):
     """

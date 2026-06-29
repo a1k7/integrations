@@ -1,6 +1,6 @@
 import pytest
 from sentinel.detectors.delegation_escalation import DelegationEscalationDetector
-from sentinel.models import SentinelInput
+from sentinel.models import SentinelInput   # use models, not schemas
 
 @pytest.fixture
 def detector():

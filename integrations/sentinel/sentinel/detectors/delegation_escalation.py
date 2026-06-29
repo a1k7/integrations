@@ -29,6 +29,7 @@ class DelegationEscalationDetector(BaseDetector):
             risk = 0.0
             reason = "No delegation chain"
 
+        # Compute detected flag
         detected = risk >= self.risk_threshold
 
         action = Action.QUARANTINE if risk > 0.7 else Action.ESCALATE if risk > 0.4 else Action.MONITOR
@@ -41,5 +42,5 @@ class DelegationEscalationDetector(BaseDetector):
             action=action,
             risk_level=risk_level,
             evidence={"delegation_chain": input_data.delegation_chain},
-            detected=detected,
+            detected=detected,   # <-- now defined
         )

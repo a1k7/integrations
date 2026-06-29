@@ -12,4 +12,6 @@ build/
 *.log
 .pytest_cache/
 .coverage
-htmlcov/.DS_Store
+htmlcov/
+report.json
+.DS_Store

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from sentinel.models import SentinelInput, DetectionResult
+from sentinel.schemas import SentinelInput, DetectionResult
 from sentinel.detectors.delegation_escalation import DelegationEscalationDetector
-from sentinel.trace_claim_generator import TraceClaimGenerator
+from sentinel.trace_claim_generator import TraceClaimGenerator, generate_trace_claim
 
 app = FastAPI(title="Agent Sentinel", version="1.0.0")
 detector = DelegationEscalationDetector()
